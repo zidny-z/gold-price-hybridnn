@@ -178,7 +178,9 @@
 							<button type="submit" class="btn btn-primary">Prediksi</button>
 						</div>
 						<div class="text-center">
-							<h4>Harga Prediksi : {{ output }}</h4>
+							{% if output %}
+								<h4>Harga Prediksi : {{ output }}</h4>
+							{% endif %}
 						</div>
 					</form>
 				</div>
@@ -255,12 +257,17 @@
 							Nilai eror?<span class="text-muted"> Rendah!</span>
 						</h2>
 						<p class="lead mt-3">
-							Raih keuntungan tanpa risiko tinggi dengan sistem prediksi harga emas kami yang memiliki nilai eror rendah. Teruji dalam
-							perbandingan prediksi dan nilai aktual yang konsisten, sistem ini memberikan keyakinan dan akurasi untuk keputusan
-							investasi yang cerdas
+							Nilai tersebut merupakan output(Y) hasil prediksi dan kedua algoritma. Untuk mencari nilai eror digunakan persamaan
+							Root Mean Square Error (RMSE) yang merupakan penjumlahan dari selisih kuadrat antara nilai aktual dan nilai prediksi yang 
+							dibagi dengan jumlah data. Nilai RMSE yang lebih kecil menunjukkan hasil prediksi yang lebih baik. Hasil dari perhitungan tersebut
+							sebagai berikut.
+							<ul class="fs-4 fw-normal">
+								<li>RMSE NNPSO : <span class="fw-bold">{{ rmse[0] }}</span></li>
+								<li>RMSE BPNN : <span class="fw-bold">{{ rmse[1] }}</span></li>
+							</ul>
 						</p>
 					</div>
-					<div class="col-md-5 order-md-1">
+					<div class="col-md-5 order-md-1 pt-5">
 						{{ div[1] | safe }}
 						{{ script[1] | safe }}
 					</div>

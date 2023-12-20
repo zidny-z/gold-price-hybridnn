@@ -18,19 +18,21 @@ x_test = np.loadtxt('models/x_test.csv', delimiter=',')
 y_test = np.loadtxt('models/y_test.csv', delimiter=',')
 Y_pred_nnpso = model_nnpso.predict(x_test).flatten()
 Y_pred_bpnn = model_bpnn.predict(x_test).flatten()
+rmse_nnpso = model_nnpso.rmse(Y_pred_nnpso, y_test)
+rmse_bpnn = model_bpnn.rmse(Y_pred_bpnn, y_test)
 
 def visualize_errors(nnpso, bpnn):
     plot = figure(title='Grafik Penurunan Eror Algoritma', x_axis_label='Epoch / Iterasi', y_axis_label='Eror', plot_width=550, plot_height=400)
-    plot.line(range(len(nnpso)), nnpso, legend_label='NNPSO', line_width=2, line_color='green')
-    plot.line(range(len(bpnn)), bpnn, legend_label='BPNN', line_width=2, line_color='orange')
+    plot.line(range(1, len(nnpso)+1), nnpso, legend_label='NNPSO', line_width=2, line_color='green')
+    plot.line(range(1, len(bpnn)+1), bpnn, legend_label='BPNN', line_width=2, line_color='orange')
     script, div = components(plot)
     return script, div
 
 def visualize_predictions(nnpso, bpnn, y_test):
     plot = figure(title='Grafik Perbandingan Y Prediksi dan Y Aktual', x_axis_label='Data ke-', y_axis_label='Y', plot_width=550, plot_height=400)
-    plot.line(range(len(nnpso)), nnpso, legend_label='NNPSO', line_width=2, line_color='green')
-    plot.line(range(len(bpnn)), bpnn, legend_label='BPNN', line_width=2, line_color='orange')
-    plot.line(range(len(y_test)), y_test, legend_label='Aktual', line_width=2, line_color='dodgerblue')
+    plot.line(range(1, len(nnpso)+1), nnpso, legend_label='NNPSO', line_width=2, line_color='green')
+    plot.line(range(1, len(bpnn)+1), bpnn, legend_label='BPNN', line_width=2, line_color='orange')
+    plot.line(range(1, len(y_test)+1), y_test, legend_label='Aktual', line_width=2, line_color='dodgerblue')
     script, div = components(plot)
     return script, div
 
@@ -42,7 +44,7 @@ def main():
     if request.method == 'GET':
         script, div = visualize_errors(nnpso_error, bpnn_error)
         script2, div2 = visualize_predictions(Y_pred_nnpso, Y_pred_bpnn, y_test)
-        return render_template('index.html', script=[script,script2], div=[div,div2])
+        return render_template('index.html', script=[script,script2], div=[div,div2], rmse=[rmse_nnpso, rmse_bpnn])
 
     if request.method == 'POST':
         script, div = visualize_errors(nnpso_error, bpnn_error)
@@ -58,7 +60,7 @@ def main():
         output = Y_normalization.inverse_transform(output)
         output = format(output[0], '.2f')
 
-        return render_template('index.html', output=output, script=[script,script2], div=[div,div2])
+        return render_template('index.html', output=output, script=[script,script2], div=[div,div2], rmse=[rmse_nnpso, rmse_bpnn])
 
 if __name__ == "__main__":
     app.run(debug=True)
