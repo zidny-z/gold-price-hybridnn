@@ -252,22 +252,30 @@
 					</div>
 				</div>
 				<div class="row featurette">
-					<div class="col-md-7 order-md-2">
+					<div class="col-md-7 order-md-2 mt-0">
 						<h2 class="featurette-heading mb-2">
 							Nilai eror?<span class="text-muted"> Rendah!</span>
 						</h2>
 						<p class="lead mt-3">
 							Nilai tersebut merupakan output(Y) hasil prediksi dan kedua algoritma. Untuk mencari nilai eror digunakan persamaan
 							Root Mean Square Error (RMSE) yang merupakan penjumlahan dari selisih kuadrat antara nilai aktual dan nilai prediksi yang 
-							dibagi dengan jumlah data. Nilai RMSE yang lebih kecil menunjukkan hasil prediksi yang lebih baik. Hasil dari perhitungan tersebut
-							sebagai berikut.
+							dibagi dengan jumlah data. Nilai RMSE yang lebih kecil menunjukkan hasil prediksi yang lebih baik. 
+							Nilai Y aktual dan Y prediksi dapat dilihat di bawah ini.
+							<ul>
+								<li class="mt-1"><small class="text-muted text-sm-start">Prediksi NNPSO : {{ y_pred[0] }}</small></li>
+								<li class="mt-1"><small class="text-muted text-sm-start">Prediksi BPNN : {{ y_pred[1] }}</small></li>
+								<li class="mt-1"><small class="text-muted text-sm-start">Y aktual : {{ y_pred[2] }}</small></li>
+							</ul>
+						</p>
+						<p class="lead mt-1">
+							Hasil dari perhitungan tersebut sebagai berikut.
 							<ul class="fs-4 fw-normal">
 								<li>RMSE NNPSO : <span class="fw-bold">{{ rmse[0] }}</span></li>
 								<li>RMSE BPNN : <span class="fw-bold">{{ rmse[1] }}</span></li>
 							</ul>
 						</p>
 					</div>
-					<div class="col-md-5 order-md-1 pt-5">
+					<div class="col-md-5 order-md-1 pt-5 mt-5">
 						{{ div[1] | safe }}
 						{{ script[1] | safe }}
 					</div>

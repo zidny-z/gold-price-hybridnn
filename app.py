@@ -44,7 +44,12 @@ def main():
     if request.method == 'GET':
         script, div = visualize_errors(nnpso_error, bpnn_error)
         script2, div2 = visualize_predictions(Y_pred_nnpso, Y_pred_bpnn, y_test)
-        return render_template('index.html', script=[script,script2], div=[div,div2], rmse=[rmse_nnpso, rmse_bpnn])
+        return render_template('index.html', 
+            script=[script,script2], 
+            div=[div,div2], 
+            rmse=[rmse_nnpso, rmse_bpnn],
+            y_pred=[Y_pred_nnpso, Y_pred_bpnn, y_test]
+        )
 
     if request.method == 'POST':
         script, div = visualize_errors(nnpso_error, bpnn_error)
@@ -60,7 +65,13 @@ def main():
         output = Y_normalization.inverse_transform(output)
         output = format(output[0], '.2f')
 
-        return render_template('index.html', output=output, script=[script,script2], div=[div,div2], rmse=[rmse_nnpso, rmse_bpnn])
+        return render_template('index.html', 
+            output=output, 
+            script=[script,script2],
+            div=[div,div2],
+            rmse=[rmse_nnpso, rmse_bpnn],
+            y_pred=[Y_pred_nnpso, Y_pred_bpnn, y_test]
+        )
 
 if __name__ == "__main__":
     app.run(debug=True)

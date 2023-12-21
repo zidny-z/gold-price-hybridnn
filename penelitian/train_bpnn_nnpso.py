@@ -101,8 +101,8 @@ if nnpso_error < bpnn_error:
      plt.title('Perbandingan eror BPNN dan NNPSO')
      bpnn_label = 'BPNN lr =' + str(learning_rate)
      nnpso_label = 'NNPSO lr =' + str(learning_rate) + ', num_particles =' + str(num_particles) + ', w =' + str(w)
-     plt.plot(bpnn_error_track, label=bpnn_label)
-     plt.plot(nnpso_error_track, label=nnpso_label)
+     plt.plot(np.arange(1, len(bpnn_error_track)+1), bpnn_error_track, label=bpnn_label)
+     plt.plot(np.arange(1, len(nnpso_error_track)+1), nnpso_error_track, label=nnpso_label)
      plt.xlabel('Iterations/Epochs')
      plt.ylabel('Error')
      plt.legend()
@@ -112,9 +112,9 @@ if nnpso_error < bpnn_error:
 
      # plot y test and y pred
      plt.title('Grafik Pembanding Y Test dan Y Prediksi')
-     plt.plot(y_test, label='Actual')
-     plt.plot(bpnn_y_pred, label=bpnn_label)
-     plt.plot(nnpso_y_pred, label=nnpso_label)
+     plt.plot(np.arange(1, len(y_test)+1), y_test, label='Actual')
+     plt.plot(np.arange(1, len(bpnn_y_pred)+1), bpnn_y_pred, label=bpnn_label)
+     plt.plot(np.arange(1, len(nnpso_y_pred)+1), nnpso_y_pred, label=nnpso_label)
      plt.xlabel('Data ke-')
      plt.ylabel('Y')
      plt.legend()
