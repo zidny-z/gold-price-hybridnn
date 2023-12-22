@@ -12,14 +12,15 @@
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous"
 		/>
-		<!-- <link href="http://cdn.bokeh.org/bokeh/release/bokeh-3.0.1.min.css" rel="stylesheet" type="text/css" /> -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.2/bokeh.min.js"></script>
-
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.3/bokeh.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script src="/static/price-picker.js"></script>
+		
 		<title>Sistem Prediksi Harga Emas</title>
-
-		<!-- Custom styles for this template -->
+		
+		<link rel="icon" href="/static/favicon.ico" />
 		<link href="/static/carousel.css" rel="stylesheet" />
-		<link href="/static/header.css" rel="stylesheet" />
+		<link href="/static/headers.css" rel="stylesheet" />
 	</head>
 	<body>
 		<header>
@@ -164,22 +165,22 @@
 						</div>
 						<div class="col-12">
 							<label for="tahun" class="form-label">Tahun</label>
-							<input type="number" class="form-control" id="tahun" name="tahun" required />
+							<input type="number" class="form-control" id="tahun" name="tahun" required placeholder="Tahun" min="1900" max="2099" step="1"/>
 						</div>
 						<div class="col-12">
-							<label for="minyak" class="form-label">Harga Minyak Bumi</label>
-							<input type="number" class="form-control" id="minyak" name="minyak" required />
+							<label for="minyak" class="form-label">Harga Minyak Bumi ($)</label>
+							<input type="number" class="form-control" id="minyak" name="minyak" required placeholder="Harga minyak bumi (40 - 120)" step="any"/>
 						</div>
 						<div class="col-12">
-							<label for="dollar" class="form-label">Harga Dolar</label>
-							<input type="number" class="form-control" id="dollar" name="dollar" required />
+							<label for="dollar" class="form-label">Harga Dolar Amerika (Rp)</label>
+							<input type="number" class="form-control" id="dollar" name="dollar" required placeholder="Harga dolar amerika (9000 - 16000)" step="any"/>
 						</div>
 						<div class="col-12">
 							<button type="submit" class="btn btn-primary">Prediksi</button>
 						</div>
 						<div class="text-center">
 							{% if output %}
-								<h4>Harga Prediksi : {{ output }}</h4>
+								<h4>Harga Prediksi : ${{ output }}</h4>
 							{% endif %}
 						</div>
 					</form>
